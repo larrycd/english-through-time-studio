@@ -1,0 +1,9 @@
+Old English and Middle English entries from English Wiktionary - Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+
+Source: English Wiktionary (https://en.wiktionary.org/), Old English (ang) and Middle English (enm) entries, as extracted
+by Wiktextract and published by kaikki.org (https://kaikki.org/dictionary/Old%20English/ and .../Middle%20English/).
+Wiktionary text is also available under the GFDL.
+Used in English Through Time Studio: data/ang.json and data/enm.json.
+Changes made: headword, part of speech, up to five English glosses, the inflected forms with their grammar tags,
+the first IPA transcription, up to two quotations, a shortened etymology, up to three alternative forms and the gender were kept.
+These files are shared under CC BY-SA 4.0. Licence text: https://creativecommons.org/licenses/by-sa/4.0/legalcode

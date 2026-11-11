@@ -1,0 +1,6 @@
+eSpeak NG speech synthesiser - GNU General Public License version 3 (full text in eSpeak-NG-GPL-3.0.txt)
+
+vendor/espeak-ng.js and vendor/espeak-ng.wasm are the unmodified files of the npm package "espeak-ng" 1.0.2
+(https://www.npmjs.com/package/espeak-ng, https://github.com/ianmarmour/espeak-ng.js), a WebAssembly build of eSpeak NG
+(https://github.com/espeak-ng/espeak-ng). Source code: both repositories above. English Through Time Studio loads these
+files only to turn phonemes into sound; the studio's own code is a separate program that runs it.

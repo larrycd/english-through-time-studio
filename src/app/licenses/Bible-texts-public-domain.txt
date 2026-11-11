@@ -1,0 +1,7 @@
+Bible texts used for the parallel reader, examples and word alignment
+
+Wycliffe Bible (c. 1395), Tyndale New Testament (1526), Geneva Bible (1599), King James Version (1611, 1769 text):
+public domain; digital texts from the scrollmapper bible_databases collection (https://github.com/scrollmapper/bible_databases).
+Berean Standard Bible: dedicated to the public domain by its publisher (2023); same collection.
+West Saxon Gospels (Wessex Gospels, c. 1175 manuscript): public domain text as published at textusreceptus.thekingsbible.com.
+Editor's notes in that text (Latin opening words, variant readings) were removed.
