@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>English Through Time Studio</title>
+<link rel="icon" href="icon.svg">
+<style>
+@font-face { font-family: 'ETCA'; src: url('fonts/ETCA.ttf') format('truetype'); }
+@font-face { font-family: 'ETFE'; src: url('fonts/ETFE.ttf') format('truetype'); }
+@font-face { font-family: 'ETBL'; src: url('fonts/ETBL.ttf') format('truetype'); }
+@font-face { font-family: 'ETUN'; src: url('fonts/ETUN.ttf') format('truetype'); }
+@font-face { font-family: 'ETRU'; src: url('fonts/ETRU.ttf') format('truetype'); }
+:root { --bg:#100e0b; --panel:#1a1713; --panel2:#24201a; --line:#3a3226; --text:#f1eadb; --dim:#a69a86; --acc:#b8862f; --acc2:#e2b65c; --red:#b04030; --ok:#6fb37f; --warn:#d9a441; --bad:#e0605a; }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--text); font:14px/1.5 "Segoe UI", system-ui, sans-serif; }
+.ca { font-family:ETCA, Georgia, serif; } .fe { font-family:ETFE, ETCA, serif; } .bl { font-family:ETBL, ETCA, serif; } .un { font-family:ETUN, ETCA, serif; } .ru { font-family:ETRU, ETCA, serif; }
+header { display:flex; align-items:center; gap:14px; padding:10px 18px; border-bottom:1px solid var(--line); background:linear-gradient(90deg,#2b1e0e,#100e0b 60%); }
+header .mark { font:34px ETCA, serif; color:var(--acc2); line-height:1; letter-spacing:2px; }
+header h1 { margin:0; font:600 21px ETCA, Georgia, serif; letter-spacing:.4px; }
+header .by { color:var(--dim); font-size:12.5px; }
+header .sp { flex:1; }
+header .ver { color:var(--dim); font-size:12px; text-align:right; max-width:600px; }
+.wrap { display:grid; grid-template-columns: 175px 1fr; min-height:calc(100vh - 66px); }
+nav { border-right:1px solid var(--line); padding:12px 8px; background:#15120e; }
+nav button { display:block; width:100%; text-align:left; background:transparent; color:var(--dim); border:1px solid transparent; border-radius:8px; padding:8px 10px; margin-bottom:4px; cursor:pointer; font-size:14px; }
+nav button.on { color:#fff; background:#2d2212; border-color:#6b5124; }
+nav .hint { padding:10px 8px; }
+main { min-width:0; }
+.view { display:none; padding:14px 16px; } .view.on { display:block; }
+.grid2 { display:grid; grid-template-columns: minmax(380px, 1.4fr) minmax(320px, 1fr); gap:14px; }
+@media (max-width:1150px) { .grid2 { grid-template-columns:1fr; } .wrap { grid-template-columns:1fr; } nav { display:flex; flex-wrap:wrap; gap:4px; } nav button { width:auto; } }
+section { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px; min-width:0; margin-bottom:14px; }
+h2 { margin:0 0 10px; font-size:13px; text-transform:uppercase; letter-spacing:1.2px; color:var(--acc2); }
+h3 { margin:14px 0 6px; font-size:12px; text-transform:uppercase; letter-spacing:1px; color:var(--dim); }
+textarea { width:100%; min-height:100px; resize:vertical; background:var(--panel2); color:var(--text); border:1px solid var(--line); border-radius:8px; padding:10px; font:19px/1.6 ETCA, Georgia, serif; }
+input[type=text], input[type=search] { width:100%; background:var(--panel2); color:var(--text); border:1px solid var(--line); border-radius:8px; padding:8px 10px; font:17px ETCA, Georgia, serif; }
+select { background:var(--panel2); color:var(--text); border:1px solid var(--line); border-radius:7px; padding:5px 8px; font-size:13px; }
+.seg { display:inline-flex; flex-wrap:wrap; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+.seg button { background:var(--panel2); color:var(--dim); border:0; border-right:1px solid var(--line); padding:6px 10px; cursor:pointer; font-size:13px; }
+.seg button:last-child { border-right:0; }
+.seg button.on { background:var(--acc); color:#1a1206; font-weight:600; }
+.row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:8px; }
+button.b { background:var(--panel2); color:var(--text); border:1px solid var(--line); border-radius:7px; padding:6px 11px; cursor:pointer; font-size:13px; }
+button.b:hover { border-color:var(--acc2); }
+button.p { background:var(--acc); border-color:var(--acc); color:#1a1206; font-weight:600; }
+button:disabled { opacity:.5; cursor:default; }
+label.ck { display:inline-flex; gap:5px; align-items:center; color:var(--dim); font-size:13px; }
+.hint { color:var(--dim); font-size:12px; }
+.note { font-size:12px; color:var(--dim); border-left:3px solid var(--acc); padding:4px 8px; margin:8px 0; background:#1f1a12; }
+.lat { font:15px Consolas, monospace; background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:8px 10px; word-break:break-word; white-space:pre-wrap; }
+.big { font-size:24px; line-height:1.6; background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:8px 12px; word-break:break-word; white-space:pre-wrap; min-height:48px; }
+.big:not(.fe):not(.bl):not(.un):not(.ru) { font-family:ETCA, Georgia, serif; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th, td { text-align:left; padding:5px 6px; border-bottom:1px solid var(--line); vertical-align:top; }
+th { color:var(--dim); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:.8px; }
+td.w { font:17px ETCA, Georgia, serif; white-space:nowrap; }
+tr.miss td { color:var(--bad); }
+.badge { display:inline-flex; gap:6px; align-items:center; font-size:12px; padding:3px 9px; border-radius:999px; border:1px solid var(--line); }
+.badge.ok { color:var(--ok); border-color:#2f5a40; } .badge.bad { color:var(--bad); border-color:#5a2a31; } .badge.wait { color:var(--warn); border-color:#5d4a26; }
+.rating { font-weight:600; }
+.rating.draft { color:var(--ok); } .rating.rough { color:var(--warn); } .rating.unusable { color:var(--bad); }
+ul.checks { margin:6px 0; padding-left:0; list-style:none; } ul.checks li { padding:2px 0; font-size:13px; }
+ul.checks li::before { content:'• '; color:var(--dim); } ul.checks li.ok::before { content:'✓ '; color:var(--ok); } ul.checks li.bad::before { content:'✗ '; color:var(--bad); }
+#stage { border:1px solid var(--line); border-radius:8px; overflow:auto; max-height:64vh; background:#0b0a08; }
+#stage svg { max-width:100%; height:auto; display:block; margin:auto; }
+.res { white-space:pre-wrap; font:12px/1.5 Consolas, monospace; background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:8px; max-height:460px; overflow:auto; }
+#drop { border:2px dashed #6b5124; border-radius:10px; padding:22px; text-align:center; color:var(--dim); cursor:pointer; }
+#drop.over { border-color:var(--acc2); color:var(--text); }
+#preview { max-width:100%; max-height:260px; display:none; margin:10px auto 0; border-radius:6px; }
+.ent { padding:8px 4px; border-bottom:1px solid var(--line); }
+.ent .hw { font:24px ETCA, Georgia, serif; margin-right:8px; }
+.ent .pos { color:var(--acc2); font-size:12px; margin-right:6px; }
+.ent .ipa { font:14px Consolas, monospace; color:#d8c7a8; margin-right:6px; }
+.ent ol { margin:4px 0 4px 18px; padding:0; }
+.ent .q { font:15px ETCA, Georgia, serif; color:#e8dcc0; margin:3px 0 0 18px; }
+.ent .q .e { color:var(--dim); font:13px "Segoe UI", sans-serif; }
+.ent details { margin:4px 0 0 18px; font-size:12.5px; color:var(--dim); }
+.ent details table td { font:14px ETCA, Georgia, serif; color:var(--text); padding:2px 6px; }
+.ent .ety { font-size:12px; color:var(--dim); margin:4px 0 0 18px; }
+.verse { padding:8px 4px; border-bottom:1px solid var(--line); }
+.verse .ref { color:var(--acc2); font-weight:600; font-size:13px; }
+.verse .col { display:grid; grid-template-columns: 210px 1fr; gap:8px; padding:2px 0; }
+.verse .col .lab { color:var(--dim); font-size:12px; }
+.verse .col .tx { font:16px/1.45 ETCA, Georgia, serif; }
+.hit { background:#5a4320; border-radius:3px; }
+.pw { display:inline-block; margin:0 10px 8px 0; padding:6px 10px; background:var(--panel2); border:1px solid var(--line); border-radius:8px; vertical-align:top; }
+.pw .t { font:19px ETCA, Georgia, serif; } .pw .i { font:15px Consolas, monospace; color:#d8c7a8; } .pw .s { font-size:11px; color:var(--dim); max-width:260px; }
+.acc { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:10px; }
+.acc > div { background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:8px 10px; font-size:12.5px; }
+.acc b { font-size:18px; color:var(--acc2); }
+.loading { color:var(--warn); }
+a { color:var(--acc2); }
+footer { color:var(--dim); font-size:12px; padding:6px 18px 16px; border-top:1px solid var(--line); }
+</style>
+</head>
+<body>
+<header>
+  <div class="mark" aria-hidden="true">þ</div>
+  <div><h1>English Through Time Studio</h1><div class="by">Old English &middot; Middle English &middot; Early Modern English &middot; by Larry Dalton</div></div>
+  <div class="sp"></div>
+  <div class="ver" id="ver">loading&hellip;</div>
+</header>
+<div class="wrap">
+<nav id="nav">
+  <button data-v="translate" class="on">⇄ Translate</button>
+  <button data-v="write">✒ Write</button>
+  <button data-v="dict">📚 Dictionary</button>
+  <button data-v="examples">📜 Examples</button>
+  <button data-v="pron">🔊 Pronounce</button>
+  <button data-v="read">🖼 Read image</button>
+  <button data-v="test">✔ Self-test</button>
+  <button data-v="about">ℹ About</button>
+  <div class="hint">Everything runs on this computer.</div>
+</nav>
+<main>
+<!-- ================= Translate ================= -->
+<div class="view on" id="v-translate">
+  <div class="grid2">
+    <div>
+      <section>
+        <h2>Translate</h2>
+        <div class="row"><span class="hint">From</span><div class="seg" id="tfrom"></div></div>
+        <div class="row"><span class="hint">To&nbsp;&nbsp;&nbsp;&nbsp;</span><div class="seg" id="tto"></div></div>
+        <textarea id="tsrc" spellcheck="false">Do you know where the king went? I do not know, but he will come home tomorrow.</textarea>
+        <div class="row" style="margin-top:8px">
+          <button class="b p" id="tgo">Translate</button>
+          <button class="b" id="tswap">⇅ Swap</button>
+          <span class="hint">"you" means</span><select id="tyou"><option value="thou">one person (thou, thee)</option><option value="ye">several people, or polite (ye, you)</option></select>
+          <label class="ck"><input type="checkbox" id="tarch" checked> older words in Early Modern (oft, ere, verily)</label>
+          <span class="hint">Examples:</span><select id="tsample"></select>
+        </div>
+      </section>
+      <section>
+        <h2>Result</h2>
+        <div class="big" id="tout"></div>
+        <div class="row" style="margin-top:8px"><span class="rating" id="trate"></span><span class="hint" id="trate2"></span></div>
+        <ul class="checks" id="tchecks"></ul>
+        <div class="row"><button class="b" id="tcopy">Copy</button><button class="b" id="ttowrite">Write it in a period script →</button><button class="b" id="ttopron">Pronounce →</button><button class="b" id="tback">Translate back ⇄</button></div>
+        <div class="hint" id="tvia"></div>
+      </section>
+    </div>
+    <div>
+      <section>
+        <h2>Word by word</h2>
+        <table><thead><tr><th>Input</th><th>Output</th><th>How it was chosen</th></tr></thead><tbody id="twords"></tbody></table>
+      </section>
+      <section>
+        <h2>Measured accuracy</h2>
+        <div class="hint">Every tenth verse of the four Gospels was kept out of everything the translator learned. Each figure is the word overlap (F1, 0&ndash;100) between the studio's translation and the real translation of that verse; the baseline is what copying the input unchanged would score.</div>
+        <div class="acc" id="tacc" style="margin-top:8px"></div>
+        <div class="note">These are honest, rough figures: overlap of words, not a judgement of meaning or style. Old English is measured against the Wessex Gospels (c. 1175), whose late spellings differ from the classical dictionary forms the studio writes, so its scores understate how readable the output is &mdash; and overstate nothing.</div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- ================= Write ================= -->
+<div class="view" id="v-write">
+  <div class="grid2">
+    <div>
+      <section>
+        <h2>Write</h2>
+        <div class="row"><div class="seg" id="wscript"></div></div>
+        <div class="hint" id="wnote" style="margin-bottom:8px"></div>
+        <textarea id="wsrc" spellcheck="false">Hwæt! We Gardena in geardagum þeodcyninga þrym gefrunon, hu ða æþelingas ellen fremedon.</textarea>
+        <div class="row" style="margin-top:8px" id="wopts"></div>
+        <div class="row">
+          <span class="hint">Style</span><select id="wtheme"><option value="vellum">Vellum</option><option value="paper">Paper</option><option value="oak">Oak gall</option><option value="night">Night</option></select>
+          <span class="hint">Size</span><select id="wsize"><option value="32">small</option><option value="48" selected>medium</option><option value="64">large</option><option value="90">extra large</option></select>
+          <span class="hint">Width</span><select id="wwidth"><option value="700">narrow</option><option value="900" selected>medium</option><option value="1200">wide</option></select>
+        </div>
+      </section>
+      <section>
+        <h2>Result</h2>
+        <div id="stage"></div>
+        <div class="row" style="margin-top:10px">
+          <button class="b p" id="exSvg">Save SVG</button><button class="b" id="exPng">Save PNG</button><button class="b" id="exJpg">Save JPEG</button><button class="b" id="cpText">Copy text</button>
+          <span class="badge wait" id="chk1">SVG read-back…</span><span class="badge wait" id="chk2">PNG read-back…</span>
+        </div>
+        <h3>As written</h3><div class="big" id="wtext"></div>
+        <div class="hint" id="wmiss"></div>
+      </section>
+    </div>
+    <div>
+      <section>
+        <h2>The letters</h2>
+        <table><tbody>
+          <tr><td class="w">þ Þ</td><td>thorn: "th" (both sounds), Old English to the 1400s; later printed as y in "ye" (= the)</td></tr>
+          <tr><td class="w">ð Ð</td><td>eth: "th", Old English, used interchangeably with þ</td></tr>
+          <tr><td class="w">ƿ Ƿ</td><td>wynn: "w", from the runic letter ᚹ; modern editions print w</td></tr>
+          <tr><td class="w">ȝ Ȝ</td><td>yogh: Middle English "gh" (night = niȝt) and "y" (ȝe = ye)</td></tr>
+          <tr><td class="w">æ Æ</td><td>ash: the vowel of "cat"</td></tr>
+          <tr><td class="w">ſ</td><td>long s: printed at the start and inside words until about 1800; round s at the end</td></tr>
+          <tr><td class="w">⁊</td><td>Tironian et: "and" (Old English "and" / "ond")</td></tr>
+          <tr><td class="w">ā ċ ġ</td><td>editors' marks: long vowels, and c / g said "ch" / "y"; the scribes did not write them</td></tr>
+          <tr><td class="w ru">ᚠᚢᚦᚩᚱᚳ</td><td>futhorc: the Anglo-Saxon runes, named after their first six letters</td></tr>
+        </tbody></table>
+      </section>
+      <section>
+        <h2>Reading your file back</h2>
+        <div class="hint">Every SVG is written from the letter outlines, so the studio can read it back exactly. Saved PNG and JPEG files are read by matching the letter shapes; the checks above show both, live, for the text on screen.</div>
+        <div class="lat" id="wread" style="margin-top:8px"></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- ================= Dictionary ================= -->
+<div class="view" id="v-dict">
+  <section>
+    <h2>Dictionary</h2>
+    <div class="row"><div class="seg" id="dlang"><button data-l="oe" class="on">Old English</button><button data-l="me">Middle English</button></div>
+      <div class="seg" id="ddir"><button data-d="old" class="on">Old word → English</button><button data-d="en">English word → old</button></div>
+      <span class="hint" id="dcount"></span></div>
+    <input type="search" id="dq" placeholder="cyning, hwæt, heofon … or king, love, heaven" value="cyning">
+    <div class="hint" style="margin-top:6px">Old spellings are matched loosely: ð = þ, ƿ = w, macrons and dots are ignored; in Middle English y = i, u = v, ȝ = y, and doubled letters count once. Inflected forms are found too (heofonum → heofon).</div>
+  </section>
+  <section><div id="dres"></div></section>
+</div>
+
+<!-- ================= Examples ================= -->
+<div class="view" id="v-examples">
+  <section>
+    <h2>Examples from real texts</h2>
+    <div class="row"><input type="search" id="xq" placeholder="a word or phrase in any period: thou, hlaford, swerd, unto, shepherd" value="shepherd" style="flex:1;min-width:240px">
+      <select id="xcol"><option value="">in any version</option></select><button class="b p" id="xgo">Find</button><button class="b" id="xrand">Random verse</button></div>
+    <div class="hint">The New Testament in six versions, verse by verse: Old English (the four Gospels only), Wycliffe, Tyndale, Geneva, King James and a modern translation. <span id="xcount"></span></div>
+  </section>
+  <section><div id="xres"></div></section>
+</div>
+
+<!-- ================= Pronounce ================= -->
+<div class="view" id="v-pron">
+  <section>
+    <h2>Pronounce</h2>
+    <div class="row"><div class="seg" id="plang"></div></div>
+    <textarea id="psrc" spellcheck="false" style="min-height:70px">Whan that Aprill with his shoures soote the droghte of March hath perced to the roote</textarea>
+    <div class="row" style="margin-top:8px"><button class="b p" id="pgo">Show IPA</button><button class="b" id="pplay">▶ Speak</button><span class="hint">Speed</span><select id="pspeed"><option value="110">slow</option><option value="140" selected>normal</option><option value="170">quick</option></select><span class="hint" id="pstat"></span></div>
+    <audio id="paudio" controls style="width:100%;margin-top:4px;display:none"></audio>
+  </section>
+  <section>
+    <h2>IPA</h2>
+    <div class="lat" id="pipa"></div>
+    <h3>Word by word</h3><div id="pwords"></div>
+    <div class="note" id="pnote"></div>
+  </section>
+</div>
+
+<!-- ================= Read image ================= -->
+<div class="view" id="v-read">
+  <div class="grid2">
+    <section>
+      <h2>Read an image</h2>
+      <div class="row"><span class="hint">Script</span><select id="rscript"><option value="auto">Find out</option></select></div>
+      <div id="drop">Drop an SVG, PNG or JPEG written by this studio here, or click to choose a file.<input type="file" id="rfile" accept=".svg,.png,.jpg,.jpeg,image/*" style="display:none"></div>
+      <img id="preview" alt="">
+      <div class="note">The reader knows the studio's own five scripts. It is not a general handwriting or manuscript reader: photographs of real manuscripts will not read.</div>
+    </section>
+    <section>
+      <h2>Text</h2>
+      <div class="row"><span class="badge" id="rbadge" style="display:none"></span><span class="hint" id="rinfo"></span></div>
+      <div class="big" id="rtext"></div>
+      <h3>In ordinary letters</h3><div class="big" id="rplain"></div>
+      <div class="row" style="margin-top:8px"><button class="b" id="rtotr">Translate this →</button><button class="b" id="rcopy">Copy</button></div>
+    </section>
+  </div>
+</div>
+
+<!-- ================= Self-test ================= -->
+<div class="view" id="v-test">
+  <section>
+    <h2>Self-test</h2>
+    <div class="row"><button class="b p" id="runTest">Run self-test</button><span class="hint" id="tstat"></span></div>
+    <div class="res" id="tlog"></div>
+  </section>
+</div>
+
+<!-- ================= About ================= -->
+<div class="view" id="v-about">
+  <section>
+    <h2>About</h2>
+    <p><b>English Through Time Studio</b> by Larry Dalton translates between today's English and three older stages of the language, writes them in period scripts, reads its own pictures back, looks words up and says them aloud. Everything runs on this computer at <span class="lat" style="padding:1px 6px">http://localhost:8772/</span>; nothing is sent anywhere.</p>
+    <table>
+      <tr><th>Period</th><th>Dates</th><th>Written here as</th></tr>
+      <tr><td>Old English (Anglo-Saxon)</td><td>c. 450&ndash;1150</td><td>classical West Saxon dictionary forms (Ælfric, c. 1000), with editors' marks ā ċ ġ</td></tr>
+      <tr><td>Middle English</td><td>c. 1150&ndash;1500</td><td>London English of the late 1300s, spelled as in the Wycliffe Bible</td></tr>
+      <tr><td>Early Modern English</td><td>c. 1500&ndash;1700</td><td>the English of Shakespeare and the King James Bible: thou/thee, -est and -eth, no "do"</td></tr>
+    </table>
+    <h3>How the translator works</h3>
+    <p class="hint">Modern English is tagged word by word (part of speech, subject or object, tense, person). Grammar words come from hand-made tables for each period (pronouns in every case, "the" in every gender and case for Old English, verb endings, helping verbs). Other words come from the Old and Middle English dictionaries, ranked by how often real translators chose them: the studio lined up 12,000 Wycliffe verses, 12,000 King James verses and 1,817 Old English Gospel verses with a modern translation and counted which words correspond. Old English nouns, verbs and adjectives are then put in the right case, number and person from the dictionary's own tables of forms. Going back to modern English, the studio finds the dictionary entry for each form (heofonum &rarr; heofon "heaven", dative plural) and puts the meaning in the right modern form. Word order is kept; idioms are not rewritten. Every word shows how it was chosen, and words that could not be found are kept and marked.</p>
+    <h3>Pronunciation</h3>
+    <p class="hint">Old and Middle English use the Wiktionary transcription when there is one for that exact word, and otherwise the studio's spelling rules for the period (Old English as around 1000; Chaucer's London around 1390). Early Modern English starts from eSpeak NG's British reading of the word and applies the main differences scholars reconstruct for around 1600 (r sounded after vowels, the vowels of "time" and "house" starting near "uh", "meat" with a long e, "name" with a plain long e). All of these are reconstructions; nobody recorded these voices. Speech is made by eSpeak NG from the IPA: a Swedish voice is used for Old and Middle English because it has the sounds that English has lost (the rolled r, the "ch" of loch, the ü of Old English y); the British voice for the later periods.</p>
+    <h3>Sources and licences</h3>
+    <ul class="hint">
+      <li>Old and Middle English dictionaries: English Wiktionary via kaikki.org (CC BY-SA 4.0) &mdash; <a href="licenses/Wiktionary-CC-BY-SA-4.0.txt">licence and changes</a></li>
+      <li>Bible texts: Wycliffe (c. 1395), Tyndale (1526), Geneva (1599), King James (1611), Berean Standard Bible, West Saxon Gospels (c. 1175) &mdash; <a href="licenses/Bible-texts-public-domain.txt">public domain</a></li>
+      <li>Modern English pronouncing dictionary: CMUdict (<a href="licenses/CMUdict-BSD.txt">BSD</a>)</li>
+      <li>Fonts: Cardo, IM FELL English, UnifrakturMaguntia, Uncial Antiqua, Noto Sans Runic (SIL Open Font Licence: <a href="licenses/cardo-OFL.txt">Cardo</a>, <a href="licenses/imfellenglish-OFL.txt">Fell</a>, <a href="licenses/unifrakturmaguntia-OFL.txt">Unifraktur</a>, <a href="licenses/uncial-OFL.txt">Uncial</a>, <a href="licenses/notosansrunic-OFL.txt">Noto</a>); letters missing from a face (wynn, yogh, ⁊ and others) are borrowed from Cardo</li>
+      <li>Text shaping: HarfBuzz (<a href="licenses/harfbuzzjs-MIT.txt">MIT</a>); speech: eSpeak NG (<a href="licenses/eSpeak-NG-NOTICE.txt">GPL-3.0</a>)</li>
+    </ul>
+  </section>
+</div>
+</main>
+</div>
+<footer>English Through Time Studio &middot; by Larry Dalton &middot; <span id="foot"></span></footer>
+
+<script src="vendor/hb.js"></script>
+<script src="vendor/hbjs.js"></script>
+<script src="js/data.js"></script>
+<script src="js/translate.js"></script>
+<script src="js/pron.js"></script>
+<script src="js/render.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>
